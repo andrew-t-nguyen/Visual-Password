@@ -23,15 +23,6 @@
           <button type="submit" class="submit-btn">Submit</button>
         </form>
     </div>
-    <script>
-        function generatePassword(length = 20) {
-            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
-            let password = "";
-            for (let i = 0, n = charset.length; i < length; ++i) {
-                password += charset.charAt(Math.floor(Math.random() * n));
-            }
-            document.getElementById('password').value = password;
-        }
-    </script>
+    <script src="/passwordGenerator.js"></script>
 </body>
 </html>

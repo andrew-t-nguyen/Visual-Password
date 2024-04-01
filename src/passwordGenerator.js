@@ -7,7 +7,7 @@ app.post("/signup", async (req, res) => {
         for (let i = 0, n = charset.length; i < length; ++i) {
             password += charset.charAt(Math.floor(Math.random() * n));
         }
-        return password; // Return the generated password
+        return password;
     }
 
     
