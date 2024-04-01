@@ -3,6 +3,7 @@ const path = require("path");
 const collection = require("./config");
 
 
+
 const app = express();
 // convert data into json format
 app.use(express.json());
@@ -37,6 +38,7 @@ app.post("/signup", async (req, res) => {
     } else {
         const userdata = await collection.insertMany(data);
         console.log(userdata);
+        res.send('Create account successfully')
     }
 
 });
@@ -48,25 +50,27 @@ app.post("/login", async (req, res) => {
     try {
         const check = await collection.findOne({ name: req.body.username });
         if (!check) {
-            res.send("User name cannot found")
+            res.send("User not found");
+            return;
         }
-        
-        const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
-        if (!isPasswordMatch) {
-            res.send("wrong Password");
-        }
-        else {
+
+        // Compare passwords (not hashed for simplicity - NOT RECOMMENDED)
+        if (req.body.password !== check.password) {
+            res.send("Incorrect password");
+        } else {
             res.render("home");
         }
-    }
-    catch {
-        res.send("ERROR");
+    } catch (error) {
+        console.error("Error:", error);
+        res.send("An error occurred while processing your request.");
     }
 });
 
 
+
+
 // Define Port for Application
-const port = 5002; //change port if there is error when executing 
+const port = 5005;
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)
 });
