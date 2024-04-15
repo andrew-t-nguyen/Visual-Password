@@ -54,7 +54,7 @@ app.post("/login", async (req, res) => {
             return;
         }
 
-        // Compare passwords (not hashed for simplicity - NOT RECOMMENDED)
+        // Compare passwords
         if (req.body.password !== check.password) {
             res.send("Incorrect password");
         } else {
