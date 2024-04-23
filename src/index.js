@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const collection = require("./config");
-
+const bcrypt = require("bcrypt")
 
 
 const app = express();
@@ -36,6 +36,11 @@ app.post("/signup", async (req, res) => {
     if (existingUser) {
         res.send('User already exists. Please choose a different username.');
     } else {
+        const saltRounds = 10; // Number of salt rounds for bcrypt
+        const hashedPassword = await bcrypt.hash(data.password, saltRounds);
+
+        data.password = hashedPassword; // Replace the original password with the hashed one
+
         const userdata = await collection.insertMany(data);
         console.log(userdata);
         res.send('Create account successfully')
@@ -50,12 +55,13 @@ app.post("/login", async (req, res) => {
     try {
         const check = await collection.findOne({ name: req.body.username });
         if (!check) {
-            res.send("User not found");
+            res.send("User name not found");
             return;
         }
 
-        // Compare passwords (not hashed for simplicity - NOT RECOMMENDED)
-        if (req.body.password !== check.password) {
+        // Compare passwords 
+        const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
+        if (!isPasswordMatch) {
             res.send("Incorrect password");
         } else {
             res.render("home");
