@@ -2,6 +2,7 @@
 const passwordInput = document.getElementById('password');
 const passwordChecklist = document.querySelector('.password-checklist');
 
+
 // Add event listener for the focus event on the password input
 passwordInput.addEventListener('input', function() {
     // Add the 'show-checklist' class to display the checklist
@@ -78,5 +79,7 @@ passwordInput.addEventListener('input', () => { // Use 'input' event for real-ti
     checklistItems[3].classList.toggle('checked', validity.numCheck);
     checklistItems[4].classList.toggle('checked', validity.specialCheck);
 });
+
+
 
 
