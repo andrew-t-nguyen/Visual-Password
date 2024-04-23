@@ -80,6 +80,21 @@ passwordInput.addEventListener('input', () => { // Use 'input' event for real-ti
     checklistItems[4].classList.toggle('checked', validity.specialCheck);
 });
 
+// prevent unqualified sign up
+document.getElementById('signup-form').addEventListener('submit', function(event) {
+    const password = document.getElementById('password').value;
+    const passwordValidity = validCheck(password);
+
+    // Check if any of the validity conditions are not met
+    if (!passwordValidity.upperCheck || !passwordValidity.lowerCheck || !passwordValidity.numCheck || !passwordValidity.specialCheck || !passwordValidity.lengthCheck) {
+        // Prevent form submission
+        event.preventDefault();
+
+        // Display error message to the user
+        document.getElementById('password-error').textContent = 'Password does not meet the requirements. Please choose another password.';
+    }
+});
+
 
 
 

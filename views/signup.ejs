@@ -13,7 +13,7 @@
 
     <div class="form-container">
         <h2>SignUp</h2>
-        <form action="/signup" method="post">
+        <form id="signup-form" action="/signup" method="post">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" name="username" placeholder="Enter your name" required autocomplete="off">
@@ -36,6 +36,7 @@
               <li class="list-item">At least 1 special character</li>
             </ul>
           </div>
+          <p id="password-error" class="error-message"></p>
           <button type="submit" class="submit-btn">Submit</button>
         </form>
     </div>
