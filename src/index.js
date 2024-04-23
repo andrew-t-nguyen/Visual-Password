@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const collection = require("./config");
-const bcrypt = require('bcrypt');
 
 
 const app = express();
@@ -55,15 +54,14 @@ app.post("/login", async (req, res) => {
     try {
         const check = await collection.findOne({ name: req.body.username });
         if (!check) {
-            res.send("User name not found");
-            return;
+            res.send("User name cannot found")
         }
-
-        // Compare passwords 
+        
         const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
         if (!isPasswordMatch) {
-            res.send("Incorrect password");
-        } else {
+            res.send("wrong Password");
+        }
+        else {
             res.render("home");
         }
     } catch (error) {
