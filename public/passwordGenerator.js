@@ -8,9 +8,6 @@ showPasswordBtn.addEventListener('click', () => {
     passwordInp.type = passwordInp.type === 'password' ? 'text' : 'password'; // Toggle password visibility
 });
 
-document.getElementById('password').addEventListener('click', function() {
-    document.getElementById('passwordChecklist').classList.toggle('show');
-});
 
 // Function to generate a random password
 function generatePassword(length = 100) {

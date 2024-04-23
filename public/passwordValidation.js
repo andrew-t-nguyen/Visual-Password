@@ -70,6 +70,9 @@ function validCheck(password) {
 passwordInput.addEventListener('input', () => { // Use 'input' event for real-time updates
     const password = passwordInput.value;
     const validity = validCheck(password);
+
+    // Calculate the password strength score
+   
     
     // Update checklist based on validity checks
     let checklistItems = passwordChecklist.querySelectorAll('.list-item');
@@ -78,6 +81,22 @@ passwordInput.addEventListener('input', () => { // Use 'input' event for real-ti
     checklistItems[2].classList.toggle('checked', validity.lowerCheck);
     checklistItems[3].classList.toggle('checked', validity.numCheck);
     checklistItems[4].classList.toggle('checked', validity.specialCheck);
+
+    let strength;
+    try {
+        strength = zxcvbn(password).score;
+        console.log(strength);
+        if (isNaN(strength)) { // Check if the score is NaN
+            throw new Error('zxcvbn returned NaN for password strength');
+        }
+    } catch (error) {
+        // Handle the error
+        console.error('Error calculating password strength:', error);
+        strength = "weak"; // Set a default strength value
+    }
+
+    const scoreText = passwordChecklist.querySelector('.score-text');
+    scoreText.textContent = `Password Strength: ${strength}`;
 });
 
 // prevent unqualified sign up
