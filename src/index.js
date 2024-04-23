@@ -36,7 +36,7 @@ app.post("/signup", async (req, res) => {
     if (existingUser) {
         res.send('User already exists. Please choose a different username.');
     } else {
-        const saltRounds = 10; // Number of salt rounds for bcrypt
+        const saltRounds = 13; // Number of salt rounds for bcrypt
         const hashedPassword = await bcrypt.hash(data.password, saltRounds);
 
         data.password = hashedPassword; // Replace the original password with the hashed one
