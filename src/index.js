@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const collection = require("./config");
+const bcrypt = require('bcrypt');
 
 
 const app = express();
@@ -40,7 +41,7 @@ app.post("/signup", async (req, res) => {
 
         data.password = hashedPassword; // Replace the original password with the hashed one
 
-        const userdata = await collection.insertMany(data);
+        const userdata = await collection.insertOne(data);
         console.log(userdata);
         res.send('Create account successfully')
     }
@@ -54,14 +55,15 @@ app.post("/login", async (req, res) => {
     try {
         const check = await collection.findOne({ name: req.body.username });
         if (!check) {
-            res.send("User name cannot found")
+            res.send("User name not found");
+            return;
         }
-        
+
+        // Compare passwords 
         const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
         if (!isPasswordMatch) {
-            res.send("wrong Password");
-        }
-        else {
+            res.send("Incorrect password");
+        } else {
             res.render("home");
         }
     } catch (error) {
