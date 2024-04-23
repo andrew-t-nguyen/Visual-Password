@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp</title>
     <link rel="stylesheet" href="/style.css">
+
+    <!--Font Awesome CDN-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
@@ -17,12 +20,27 @@
           </div>
           <div class="form-group">
             <label for="password">Password:</label>
-            <input type="test" id="password" name="password" placeholder="Password" required>
+            <div class="password-container">
+              <input type="password" id="password" name="password" placeholder="Password" required>
+              <i class="fa-solid fa-eye show-password"></i>
+            </div>
             <button type="button" id="generate-password" onclick="generatePassword()">Generate Password</button>
+          </div>
+          <div class="password-checklist">
+            <h3 class="checklist-title">Password must have</h3>
+            <ul class="checklist"> 
+              <li class="list-item">At least 10 character long</li>
+              <li class="list-item">At least 1 uppercase</li>
+              <li class="list-item">At least 1 lowercase</li>
+              <li class="list-item">At least 1 number</li>
+              <li class="list-item">At least 1 special character</li>
+            </ul>
           </div>
           <button type="submit" class="submit-btn">Submit</button>
         </form>
     </div>
     <script src="passwordGenerator.js"></script>
+    <script src="bower_components/dist/zxcvbn.js"></script>
+    <script src="passwordValidation.js"></script>
 </body>
 </html>

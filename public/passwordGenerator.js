@@ -1,3 +1,17 @@
+// show password toggler
+let showPasswordBtn = document.querySelector('.show-password');
+let passwordInp = document.getElementById('password');
+
+showPasswordBtn.addEventListener('click', () => {
+    showPasswordBtn.classList.toggle('fa-eye');
+    showPasswordBtn.classList.toggle('fa-eye-slash');
+    passwordInp.type = passwordInp.type === 'password' ? 'text' : 'password'; // Toggle password visibility
+});
+
+document.getElementById('password').addEventListener('click', function() {
+    document.getElementById('passwordChecklist').classList.toggle('show');
+});
+
 // Function to generate a random password
 function generatePassword(length = 100) {
     const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
@@ -9,5 +23,14 @@ function generatePassword(length = 100) {
 }
 
 document.getElementById("generate-password").addEventListener("click", function() {
-    document.getElementById("password").value = generatePassword();
+    const newPassword = generatePassword();
+    document.getElementById("password").value = newPassword;
+    
+    // Manually trigger the 'input' event on the password input field
+    const passwordInput = document.getElementById('password');
+    const inputEvent = new Event('input', {
+        bubbles: true,
+        cancelable: true,
+    });
+    passwordInput.dispatchEvent(inputEvent);
 });

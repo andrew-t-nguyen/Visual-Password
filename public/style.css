@@ -66,6 +66,81 @@ h2 {
     box-shadow: 0 0 0 2px rgba(71,45,187,0.2);
 }
 
+.password-container {
+    position: relative;
+}
+
+#password {
+    padding-right: 40px;
+    
+}
+
+.password-container .fa-eye {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: transform 0.3s; 
+}
+.password-container .fa-eye-slash {
+    position: absolute;
+    top: 50%;
+    right: 10px; 
+    transform: translateY(-50%);
+    cursor: pointer;
+    
+    transition: opacity 0.3s; 
+}
+
+.password-checklist {
+    position: absolute; /* Initial position */
+    top: calc(100% + 10px); /* Initial position */
+    width: 100%;
+    padding: 20px 30px;
+    border-radius: 5px;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Added transition */
+}
+
+.show-checklist {
+    position: relative; /* Initial position */
+    top: calc(100% + 10px); /* Initial position */
+    width: 100%;
+    padding: 20px 30px;
+    border-radius: 5px;
+    transform: translateY(0); /* Move checklist to original position */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Added transition */
+}
+
+.checklist-title{
+    font-size: 15px;
+    margin-bottom:10px;
+}
+
+.checklist{
+    list-style: none;
+}
+.list-item{
+    padding-left: 30px;
+    font-size: 14px;
+}
+.list-item::before{
+    content: '\f00d';
+    font-family: FontAwesome;
+    display: inline-block;
+    margin: 8px 0;
+    margin-left: -30px;
+    width: 20px;
+    font-size: 12px;
+}
+.list-item.checked{
+    opacity: 0.5;
+}
+.list-item.checked::before{
+    content: '\f00c';
+}
+
 .submit-btn {
     display: block;
     width: 100%;
