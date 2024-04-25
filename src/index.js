@@ -44,7 +44,12 @@ function generateVerificationCode(){
 app.get("/signup", (req, res) => {
     res.render("signup");
 });
-
+app.get("/visualsignup", (req, res) => {
+    res.render("visualsignup");
+});
+app.get("/visuallogin", (req, res) => {
+    res.render("visuallogin");
+});
 // Register User
 app.post("/signup", async (req, res) => {
 
