@@ -3,19 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>visuallogin</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Visual Login</title>
 
-    <!--Font Awesome CDN-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1 style="text-align: center;
-                color :aliceblue;
-                font-size: 80px;
-                text-shadow: -1px -1px 0 #000,  
-                          1px -1px 0 #000,
-                          -1px 1px 0 #000,
-                          1px 1px 0 #000;">Welcome to the Visual Login</h1>
+
+    <div class="form-container">
+        <h2>Login</h2>
+        <form action="/visuallogin" method="post">
+          <div class="form-group">
+            <label for="visual-login-name">Visual Login:</label>
+            <input type="text" id="name" name="Username" placeholder="Enter your name" required autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="password">Password(Enter your sequence):</label>
+            <table align="center">
+                <tr>
+                    <td><img src="/images/cat1.jpg" alt="cell01" height="80px" width="80px"></td>
+                    <td><img src="/images/cat2.jpg" alt="cell02" height="80px" width="80px"></td>
+                    <td><img src="/images/cat3.jpg" alt="cell03" height="80px" width="80px"></td>
+                </tr>
+                <tr>
+                    <td><img src="/images/cat4.jpg" alt="cell04" height="80px" width="80px"></td>
+                    <td><img src="/images/cat5.png" alt="cell05" height="80px" width="80px"></td>
+                    <td><img src="/images/cat6.jpg" alt="cell06" height="80px" width="80px"></td>
+                </tr>
+                <tr>
+                    <td><img src="/images/cat6.jpg" alt="cell07" height="80px" width="80px"></td>
+                    <td><img src="/images/cat8.jpg" alt="cell08" height="80px" width="80px"></td>
+                    <td><img src="/images/cat9.jpg" alt="cell09" height="80px" width="80px"></td>
+                </tr>
+            </table>
+          </div>
+          <button type="submit" class="submit-btn">Login</button>
+        </form>
+      </div>
+    
 </body>
-</html>   
+</html>
