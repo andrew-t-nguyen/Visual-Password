@@ -86,6 +86,7 @@ passwordInput.addEventListener('input', () => { // Use 'input' event for real-ti
     try {
         strength = zxcvbn(password).score;
         console.log(strength);
+        console.log(zxcvbn(password));
         if (isNaN(strength)) { // Check if the score is NaN
             throw new Error('zxcvbn returned NaN for password strength');
         }

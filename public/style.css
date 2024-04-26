@@ -158,16 +158,22 @@ h2 {
     background-color: #5a4eec;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
-
+/* 
 p {
     text-align: center;
     margin-top: 20px;
-}
+} */
 
-.matrix-xontrainer {
-    text-align: center;
+.matrix-container img {
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-
-.center-table {
-    margin: 0 auto 20px;
+.matrix-container img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.matrix-container img.selected {
+    border: 2px solid blue;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
 }

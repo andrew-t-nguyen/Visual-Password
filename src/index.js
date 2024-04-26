@@ -140,6 +140,52 @@ app.get("/home", (req, res) => {
     res.render("home");
 });
 
+app.post("/visualsignup", async (req, res) => {
+    try {
+      const selectedImageIds = req.body.selectedImageIds;
+      console.log('Selected Image IDs:', selectedImageIds);
+      const data = {
+        name: req.body.username,
+        email: req.body.user_email,
+        picturePassword: [],
+        secretKey: speakeasy.generateSecret().base32,
+      };
+  
+      // Check if the username already exists in the database
+      const existingUser = await collection.findOne({ name: data.name });
+      if (existingUser) {
+        res.send('User already exists. Please choose a different username.');
+      } else {
+        if (selectedImageIds) {
+          // Convert the comma-separated string to an array
+          const imageIdsArray = selectedImageIds.split(',');
+  
+          if (imageIdsArray.length === 6) {
+            const saltRounds = 13; // Number of salt rounds for bcrypt
+            const hashedPicturePassword = [];
+  
+            for (const element of imageIdsArray) {
+              const hashedPassword = await bcrypt.hash(element, saltRounds);
+              hashedPicturePassword.push(hashedPassword);
+            }
+  
+            data.picturePassword = hashedPicturePassword;
+          } else {
+            res.status(400).send('Please select exactly 6 images for the picture password.');
+            return;
+          }
+        }
+  
+        const userdata = await collection.insertMany(data);
+        console.log(userdata);
+        console.log(data.picturePassword);
+        res.send('Account created successfully');
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      res.status(500).send("An error occurred while processing your request.");
+    }
+  });
 
 // Define Port for Application
 const port = 5005;

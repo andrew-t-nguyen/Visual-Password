@@ -16,15 +16,30 @@ const Loginschema = new mongoose.Schema({
         required: true
     },
     email: {
-      type:String,
-      required: true  
+        type:String,
+        required: true  
     },
     password: {
         type: String,
-        required: true
+        required: false 
+        
     },
+    picturePassword: {
+        type: [String],
+        require:false,
+    },
+
     secretKey: String
 });
+
+// Middleware to validate picturePassword length before saving
+// Loginschema.pre('save', function(next) {
+//     if (this.picturePassword && this.picturePassword.length !== 6) {
+//         const err = new Error('You must provide exactly 6 picture IDs.');
+//         return next(err);
+//     }
+//     next();
+// });
 
 // collection part
 const collection = new mongoose.model("users", Loginschema);
