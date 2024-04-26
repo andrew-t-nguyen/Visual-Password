@@ -163,3 +163,11 @@ p {
     text-align: center;
     margin-top: 20px;
 }
+
+.matrix-xontrainer {
+    text-align: center;
+}
+
+.center-table {
+    margin: 0 auto 20px;
+}
