@@ -144,6 +144,7 @@ app.post("/main_login", async (req, res) => {
   
         // Store the decrypted picture password in the session or pass it as a query parameter
         req.session.decryptedPicturePassword = decryptedPicturePassword;
+        req.session.username = check.name;
   
         return res.redirect("/visuallogin");
       } else {
@@ -226,7 +227,7 @@ app.post("/visualsignup", async (req, res) => {
     }
   });
 
-  app.get("/visuallogin", async (req, res) => {
+app.get("/visuallogin", async (req, res) => {
     const decryptedPicturePassword = req.session.decryptedPicturePassword;
   
     if (!decryptedPicturePassword || decryptedPicturePassword.length === 0) {
@@ -239,7 +240,7 @@ app.post("/visualsignup", async (req, res) => {
     res.render("visuallogin", { picturePassword: decryptedPicturePassword, randomImageId: randomImageId });
   });
 
-  app.post("/visuallogin", async (req, res) => {
+app.post("/visuallogin", async (req, res) => {
     const selectedImageId = req.body.selectedImageId;
     const decryptedPicturePassword = req.session.decryptedPicturePassword;
   
@@ -260,9 +261,16 @@ app.post("/visualsignup", async (req, res) => {
     if (decryptedPicturePassword.length === 0) {
       // User has successfully answered all image IDs
       try {
-        const check = await collection.findOne({ name: req.body.Username });
-        if (!check) {
-          return res.send("User name not found");
+        // const check = await collection.findOne({ name: req.body.Username });
+        // if (!check) {
+        //   return res.send("User name not found");
+        // }
+
+        const username = req.session.username; // Retrieve the username from the session
+         const user = await collection.findOne({ name: username });
+
+        if (!user) {
+          return res.send("User not found");
         }
   
         // Generate and send the verification code
@@ -270,7 +278,7 @@ app.post("/visualsignup", async (req, res) => {
         req.session.verificationCode = verificationCode;
         const mailOptions = {
           from: 'peksonmichael@yahoo.com',
-          to: check.email,
+          to: user.email,
           subject: 'Verification Code for Login',
           text: `Your verification code is: ${verificationCode}`
         };
