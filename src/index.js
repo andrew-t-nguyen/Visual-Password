@@ -19,6 +19,12 @@ app.use(express.urlencoded({ extended: false }));
 
 app.set("view engine", "ejs");
 
+app.use(session({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: true
+  }));
+
 app.get("/", (req, res) => {
     res.render("main_login");
 });
@@ -32,9 +38,6 @@ app.get("/signup", (req, res) => {
 });
 app.get("/visualsignup", (req, res) => {
     res.render("visualsignup");
-});
-app.get("/visuallogin", (req, res) => {
-    res.render("visuallogin");
 });
 
 app.get("/otp_ver", (req, res) => {
@@ -89,8 +92,6 @@ app.post("/signup", async (req, res) => {
     }
 
 });
-
-
 
 // Login user 
 app.post("/login", async (req, res) => {
@@ -199,7 +200,7 @@ app.post("/visualsignup", async (req, res) => {
           // Convert the comma-separated string to an array
           const imageIdsArray = selectedImageIds.split(',');
   
-          if (imageIdsArray.length > 0) {
+          if (imageIdsArray.length === 6) {
             const encryptedPicturePassword = [];
           for (const element of imageIdsArray) {
             // Encrypt the element using AES with the secret key
@@ -223,6 +224,70 @@ app.post("/visualsignup", async (req, res) => {
       console.error("Error:", error);
       res.status(500).send("An error occurred while processing your request.");
     }
+  });
+
+  app.get("/visuallogin", async (req, res) => {
+    const decryptedPicturePassword = req.session.decryptedPicturePassword;
+  
+    if (!decryptedPicturePassword || decryptedPicturePassword.length === 0) {
+      return res.redirect("/");
+    }
+  
+    const randomIndex = Math.floor(Math.random() * decryptedPicturePassword.length);
+    const randomImageId = decryptedPicturePassword[randomIndex];
+  
+    res.render("visuallogin", { picturePassword: decryptedPicturePassword, randomImageId: randomImageId });
+  });
+
+  app.post("/visuallogin", async (req, res) => {
+    const selectedImageId = req.body.selectedImageId;
+    const decryptedPicturePassword = req.session.decryptedPicturePassword;
+  
+    if (!decryptedPicturePassword || decryptedPicturePassword.length === 0) {
+      return res.redirect("/");
+    }
+  
+    const currentImageIndex = decryptedPicturePassword.indexOf(selectedImageId);
+  
+    if (currentImageIndex === -1) {
+      // User selected the wrong image
+      req.session.decryptedPicturePassword = []; // Clear the session
+      return res.redirect("/");
+    }
+  
+    decryptedPicturePassword.splice(currentImageIndex, 1); // Remove the correctly selected image ID
+  
+    if (decryptedPicturePassword.length === 0) {
+      // User has successfully answered all image IDs
+      try {
+        const check = await collection.findOne({ name: req.body.Username });
+        if (!check) {
+          return res.send("User name not found");
+        }
+  
+        // Generate and send the verification code
+        const verificationCode = generateVerificationCode();
+        req.session.verificationCode = verificationCode;
+        const mailOptions = {
+          from: 'peksonmichael@yahoo.com',
+          to: check.email,
+          subject: 'Verification Code for Login',
+          text: `Your verification code is: ${verificationCode}`
+        };
+        await transporter.sendMail(mailOptions);
+  
+        // Redirect to the OTP verification page
+        return res.redirect("/otp_ver");
+      } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).send("An error occurred while processing your request.");
+      }
+    }
+  
+    const randomIndex = Math.floor(Math.random() * decryptedPicturePassword.length);
+    const randomImageId = decryptedPicturePassword[randomIndex];
+  
+    res.render("visuallogin", { picturePassword: decryptedPicturePassword, randomImageId: randomImageId });
   });
 
 // Define Port for Application

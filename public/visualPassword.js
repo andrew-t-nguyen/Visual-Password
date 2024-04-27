@@ -28,7 +28,7 @@ async function fetchPictures() {
 async function displayPictures() {
   const pictures = await fetchPictures();
 
-  console.log(`Fetched ${perPage} pictures:`, pictures)
+  console.log(`Fetched ${perPage} pictures:`, pictures);
 
   if (pictures) {
     // Update the images in the container with the fetched pictures
@@ -44,8 +44,8 @@ async function displayPictures() {
 }
 
 document.getElementById('changePicturesBtn').addEventListener('click', function(event) {
-    event.preventDefault();
-    displayPictures(); 
+  event.preventDefault();
+  displayPictures();
 });
 
 // Call the function once when the page loads
@@ -115,11 +115,10 @@ async function handleImageSelection(event) {
 function updateSelectedImageIdsInput() {
   const selectedImageIdsInput = document.getElementById('selectedImageIdsInput');
   selectedImageIdsInput.value = selectedImageIds.join(',');
-  
 }
 
 const signUpPicContainerImages = document.querySelectorAll('.signUp-picContainer img');
 signUpPicContainerImages.forEach(image => {
   image.addEventListener('click', handleImageSelection);
 });
-  
+

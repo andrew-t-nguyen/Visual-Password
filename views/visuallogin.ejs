@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Login</title>
-
-    <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Login</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-
-    <div class="form-container">
-        <h2>Visual Login</h2>
-        <form action="/visuallogin" method="post">
-          <div class="form-group">
-            <label for="visual-login-name">Visual Login:</label>
-            <input type="text" id="name" name="Username" placeholder="Enter your name" required autocomplete="off">
-          </div>
-          <div class="matrix-container" align="center">
-          <div class="form-group">
-            <label for="password">Password(Enter your sequence):</label>
-            <table align="center">
-                <tr>
-                    <td><img src="/images/cat1.jpg" id="logIn_box1" alt="cell01" height="80px" width="80px"></td>
-                    <td><img src="/images/cat2.jpg" id="logIn_box2" alt="cell02" height="80px" width="80px"></td>
-                    <td><img src="/images/cat3.jpg" id="logIn_box3" alt="cell03" height="80px" width="80px"></td>
-                </tr>
-                <tr>
-                    <td><img src="/images/cat4.jpg" id="logIn_box4" alt="cell04" height="80px" width="80px"></td>
-                    <td><img src="/images/cat5.png" id="logIn_box5" alt="cell05" height="80px" width="80px"></td>
-                    <td><img src="/images/cat6.jpg" id="logIn_box6" alt="cell06" height="80px" width="80px"></td>
-                </tr>
-                <tr>
-                    <td><img src="/images/cat6.jpg" id="logIn_box7" alt="cell07" height="80px" width="80px"></td>
-                    <td><img src="/images/cat2.jpg" id="logIn_box8" alt="cell08" height="80px" width="80px"></td>
-                    <td><img src="/images/cat1.jpg" id="logIn_box9" alt="cell09" height="80px" width="80px"></td>
-                </tr>
-            </table>
-          </div>
-          </div>
-          <button type="submit" class="submit-btn">Login</button>
-        </form>
+  <div class="form-container">
+    <h2>Visual Login</h2>
+    <input type="hidden" id="decryptedPicturePassword" value="<%= picturePassword %>">
+    <form action="/visuallogin" method="post">
+      <div class="form-group">
+        <label for="visual-login-name">Visual Login:</label>
+        <input type="text" id="name" name="Username" placeholder="Enter your name" required autocomplete="off">
       </div>
-    
+      <div class="matrix-container" align="center">
+        <div class="form-group">
+          <label for="password">Password (Select the correct image):</label>
+          <table class="logIn-picContainer" align="center">
+            <tr>
+              <td><img src="" alt="cell01" height="80px" width="80px" data-index="0" onclick="selectImage(this)"></td>
+              <td><img src="" alt="cell02" height="80px" width="80px" data-index="1" onclick="selectImage(this)"></td>
+              <td><img src="" alt="cell03" height="80px" width="80px" data-index="2" onclick="selectImage(this)"></td>
+            </tr>
+            <tr>
+              <td><img src="" alt="cell04" height="80px" width="80px" data-index="3" onclick="selectImage(this)"></td>
+              <td><img src="" alt="cell05" height="80px" width="80px" data-index="4" onclick="selectImage(this)"></td>
+              <td><img src="" alt="cell06" height="80px" width="80px" data-index="5" onclick="selectImage(this)"></td>
+            </tr>
+            <tr>
+              <td><img src="" alt="cell07" height="80px" width="80px" data-index="6" onclick="selectImage(this)"></td>
+              <td><img src="" alt="cell08" height="80px" width="80px" data-index="7" onclick="selectImage(this)"></td>
+              <td><img src="" alt="cell09" height="80px" width="80px" data-index="8" onclick="selectImage(this)"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <input type="hidden" id="selectedImageId" name="selectedImageId">
+      <button type="submit" class="submit-btn">Login</button>
+    </form>
+  </div>
+
+  <!-- <script src="/visualPassword.js"></script> -->
+  <script src="/loginVisualPassword.js"></script>
 </body>
 </html>
