@@ -298,8 +298,29 @@ app.post("/visuallogin", async (req, res) => {
     res.render("visuallogin", { picturePassword: decryptedPicturePassword, randomImageId: randomImageId });
   });
 
+/*
 // Define Port for Application
 const port = 5005;
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)
+});
+*/
+
+
+//stuff to make certifications workI
+//only applicable when inside the amazon ec2 instance
+const https = require('https');
+const fs = require('fs');
+
+// SSL certificate paths
+const options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/t14cecs378lab3.shop/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/t14cecs378lab3.shop/cert.pem')
+};
+
+// Define Port for Application
+const port = 443;
+
+https.createServer(options, app).listen(port, () => {
+    console.log(`Server listening on port ${port}`);
 });
