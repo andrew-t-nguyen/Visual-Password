@@ -3,7 +3,7 @@
 This project is a test website to showcase our implementation of a visual password. \
 Created by: \
 Drew Nguyen \
-Henry Nguyen \
+Phuc Nguyen \
 Michael Pekson \
 Brian Aiad \
 Arthur King Ordonez
