@@ -1,18 +1,23 @@
-<!-- otp-verification.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTP Verification</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <h2>OTP Verification</h2>
-    <p>Please enter the one-time password.</p>
-    <form action="/otp_ver" method="post">
-        <label for="otp">One-Time Password (OTP):</label>
-        <input type="text" id="otp" name="otp" required><br><br>
-        <button type="submit">Verify OTP</button>
-    </form>
+    <div class="form-container">
+        <h2>OTP Verification</h2>
+        <p>Please enter the one-time password.</p>
+        <form action="/otp_ver" method="post">
+            <div class="form-group">
+                <label for="otp">One-Time Password (OTP):</label>
+                <input type="text" id="otp" name="otp" required>
+            </div>
+            <button type="submit" class="submit-btn">Verify OTP</button>
+        </form>
+    </div>
 </body>
 </html>

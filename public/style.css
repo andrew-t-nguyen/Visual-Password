@@ -10,6 +10,7 @@
 body {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
@@ -19,6 +20,30 @@ body {
 h2 {
     text-align: center;
     margin-bottom: 30px;
+}
+
+.welcome-container {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.welcome-container h1 {
+    font-size: 36px;
+    font-weight: 600;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .form-container {
@@ -33,7 +58,7 @@ h2 {
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
@@ -72,7 +97,6 @@ h2 {
 
 #password {
     padding-right: 40px;
-    
 }
 
 .password-container .fa-eye {
@@ -81,36 +105,36 @@ h2 {
     right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
-    transition: transform 0.3s; 
+    transition: transform 0.3s;
 }
+
 .password-container .fa-eye-slash {
     position: absolute;
     top: 50%;
-    right: 10px; 
+    right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
-    
-    transition: opacity 0.3s; 
+    transition: opacity 0.3s;
 }
 
 .password-checklist {
-    position: absolute; /* Initial position */
-    top: calc(100% + 10px); /* Initial position */
+    position: absolute;
+    top: calc(100% + 10px);
     width: 100%;
     padding: 20px 30px;
     border-radius: 5px;
     transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Added transition */
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .show-checklist {
-    position: relative; /* Initial position */
-    top: calc(100% + 10px); /* Initial position */
+    position: relative;
+    top: calc(100% + 10px);
     width: 100%;
     padding: 20px 30px;
     border-radius: 5px;
-    transform: translateY(0); /* Move checklist to original position */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Added transition */
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .checklist-title{
@@ -121,10 +145,12 @@ h2 {
 .checklist{
     list-style: none;
 }
+
 .list-item{
     padding-left: 30px;
     font-size: 14px;
 }
+
 .list-item::before{
     content: '\f00d';
     font-family: FontAwesome;
@@ -134,9 +160,11 @@ h2 {
     width: 20px;
     font-size: 12px;
 }
+
 .list-item.checked{
     opacity: 0.5;
 }
+
 .list-item.checked::before{
     content: '\f00c';
 }
@@ -153,16 +181,6 @@ h2 {
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
-
-.submit-btn:hover {
-    background-color: #5a4eec;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-/* 
-p {
-    text-align: center;
-    margin-top: 20px;
-} */
 
 .matrix-container img {
     cursor: pointer;
