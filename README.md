@@ -15,6 +15,9 @@ Node \
 MongoDB Atlas \
 Git
 
+We do not recommend downloading a .zip copy of the build as it may conflict with some of the dependencies.\
+Please follow the steps below instead.
+
 ## Running the Program
 
 1. On a command line pointing to an empty folder, run the following code
